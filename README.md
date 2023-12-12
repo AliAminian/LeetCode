@@ -20,5 +20,3 @@ This project is to gather all my solutions for LeetCode problems
 
 ```bash
 ./createNew.sh YOUR_NEW_SOLUTION_NAME
-
-./createNew.sh "Greatest Common Divisor of Strings"
