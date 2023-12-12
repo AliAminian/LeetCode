@@ -1,4 +1,4 @@
-fir# LeetCode Solutions
+# LeetCode Solutions
 
 This project is to gather all my solutions for LeetCode problems
 
