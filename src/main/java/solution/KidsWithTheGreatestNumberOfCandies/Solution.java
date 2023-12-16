@@ -1,4 +1,4 @@
-package solution.kidswiththegreatestnumberofcandies;
+package solution.KidsWithTheGreatestNumberOfCandies;
 
 import java.util.ArrayList;
 import java.util.List;

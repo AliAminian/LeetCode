@@ -1,4 +1,4 @@
-package solution.reversevowelsofastring;
+package solution.ReverseVowelsOfAString;
 import java.util.HashMap;
 import java.util.Map;
 

@@ -8,7 +8,7 @@ fi
 
 
 input=$1
-package_name=$(echo "${input}" | tr -d ' ' | tr '[:upper:]' '[:lower:]')
+package_name=$(echo "${input}" | tr -d ' ')
 method_name=$(echo "${input}" | tr -d ' ')
 directory_name="./src/main/java/solution/${package_name}"
 
