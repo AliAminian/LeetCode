@@ -1,6 +1,6 @@
 # LeetCode Solutions
 
-This project is to gather all my solutions for LeetCode problems
+This project is to gather all my solutions for [LeetCode](https://leetcode.com/studyplan/leetcode-75/) problems 
 
 ## Getting Started
 
