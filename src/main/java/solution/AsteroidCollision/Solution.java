@@ -1,7 +1,6 @@
 package solution.AsteroidCollision;
 
-import java.util.Arrays;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * The problem
@@ -9,52 +8,42 @@ import java.util.Stack;
 public class Solution {
     public static void main(String[] args) {
         Solution sol = new Solution();
-        int[] resn = sol.asteroidCollision(new int[]{1,1,-1,-2});
-        Arrays.stream(resn).forEach(System.out::println);
+        List<Integer> resn = sol.getTotalExecutionTime(
+                3, List.of(new String[]{
+                        "0:start:0",
+                        "0:end:4",
+                        "0:start:5",
+                        "0:end:10"})
+        );
+        resn.stream().forEach(System.out::println);
     }
 
-    public int[] asteroidCollision(int[] asteroids) {
-        Stack<Integer> as = new Stack<>();
-        int prev = -1001;
-        for (int el: asteroids) {
-            if (el > 0) {
-                as.push(el);
-            } else if (el < 0) { // Collision
-                if (Math.abs(el) == Math.abs(prev)) {
-                    as.pop();
-                    as.pop();
-                    if (!as.isEmpty()) {
-                        prev = as.peek();
-                        continue;
-                    }
+
+    public List<Integer> getTotalExecutionTime(int n, List<String> logs) {
+        // Write your code here
+        Stack<String> execStack = new Stack<>();
+        Map<Integer, Integer> durMap = new HashMap<>();
+
+        for (int i = 0; i < logs.size(); i++) {
+            String log = logs.get(i);
+            String[] params = log.split(":");
+
+            if (log.contains("start")) {
+                execStack.push(log);
+            } else {
+                if (execStack.isEmpty()) break;
+                String[] tmp = execStack.pop().split(":");
+                int dur = Integer.valueOf(params[2]) - Integer.valueOf(tmp[2]);
+                int id = Integer.valueOf(params[0]);
+                if (!durMap.containsKey(id)) {
+                    durMap.put(id, dur);
                 } else {
-                    while(el < 0 && prev > 0 && !as.isEmpty()) {
-                        el = as.pop();
-                        if (as.isEmpty()) {
-                            as.push(el);
-                            break;
-                        }
-                        prev = as.pop();
-                        el = collide(prev, el);
-                        if (el == -1001) {
-                            prev = el;
-                            continue;
-                        }
-                        if (!as.isEmpty()) prev = as.peek();
-                        as.push(el);
-                    }
+                    durMap.put(id, durMap.get(id)+dur);
                 }
             }
-            prev = el;
         }
-        Object[] arr = as.toArray();
-        int[] res = new int[arr.length];
-        for (int i = 0; i < arr.length; i++) res[i] = (Integer)arr[i];
-        return res;
+        return new ArrayList<Integer>(durMap.values());
     }
 
-    private int collide(int prev , int cur) {
-        if (Math.abs(prev) == Math.abs(cur)) return -1001;
-        return (Math.abs(prev) > Math.abs(cur))? prev: cur;
-    }
 }
+
